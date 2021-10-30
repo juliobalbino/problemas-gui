@@ -97,7 +97,8 @@ function Navbar() {
                                 doações
                             </Typography>
                         </Box>
-
+                    </Box>
+                    <Box display='flex' justifyContent='end' width='auto' className='boxToolbar'>
                         <Search>
                             <SearchIconWrapper>
                                 <SearchIcon />
@@ -108,17 +109,13 @@ function Navbar() {
                             />
                         </Search>
 
-                        <Box display='flex' justifySelf='flex-end'>
+                        <Box display='flex' justifySelf='flex-end' alignItems="center">
                             <Typography variant="h6" color="inherit">
                                 logout
                             </Typography>
                         </Box>
                     </Box>
                 </Toolbar>
-
-
-
-
             </AppBar>
         </>
     )
