@@ -1,122 +1,135 @@
 import './Navbar.css';
 import React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
-import { Box } from '@material-ui/system';
+import { AppBar, Box, Grid, Toolbar, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTipo, addToken } from '../../../store/user/actions';
+import { toast } from 'react-toastify';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import BasicMenu from '../navbarMenu/navbarMenu';
+import { UserState } from '../../../store/user/userReducer';
 
-
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-    },
-}));
 
 function Navbar() {
+    
+    const token = useSelector<UserState, UserState["tokens"]>(
+        (state) => state.tokens
+    );
+
+    const name = useSelector<UserState, UserState["names"]>(
+        (state) => state.names
+    );
+    
+    const tipo = useSelector<UserState, UserState["tipos"]>(
+        (state) => state.tipos
+    );
+
+    let history = useHistory();
+    const dispatch = useDispatch();
+
+    function goLogout(){
+        dispatch(addToken(''));
+        dispatch(addTipo(''));
+        toast.info('Usuário deslogado', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: 'colored',
+            progress: undefined,
+        });
+        history.push('/login')
+    }
+
+    var navbarComponent;
+    var headComponent; 
+    var menuAdm;
+
+    if (tipo == 'Admin') {
+        menuAdm = <Box mx={5} >
+            <BasicMenu />
+        </Box>
+    }
+
+    if(token != ''){
+        headComponent = 
+        <Grid container direction="row" justifyContent='center' alignItems="center" >
+        <Grid alignItems="center" item xs={12}>
+            <Box className='logo'>
+                <img className='imgLogo' src="https://i.imgur.com/mLUh1HH.png" alt="" />  
+            </Box>
+        </Grid>
+    </Grid>
+    }
+
+    if(token !=''){
+        navbarComponent = 
+        <AppBar position="static">
+        <Toolbar className='menu' variant="dense" >
+        <Box display='flex' justifyContent='center' className='boxToolbar' flexWrap='wrap'>
+
+                <Link to='/home' className='text-decorator-none'>
+                    <Box mx={5} className='cursor'>
+                        
+                        <Typography variant="h6" color="inherit">
+                            Home
+                        </Typography>
+                    </Box>
+                </Link>
+
+                <Link to='/produtos' className='text-decorator-none'>
+                    <Box mx={5} className='cursor'>
+                       
+                        <Typography variant="h6" color="inherit">
+                            Produtos
+                        </Typography>
+                    </Box>
+                </Link>
+
+                <Link to='/categoria' className='text-decorator-none'>
+                    <Box mx={5} className='cursor'>
+                       
+                        <Typography variant="h6" color="inherit">
+                            Categoria
+                        </Typography>
+                    </Box>
+                </Link>
+
+                <Link to='/sobre' className='text-decorator-none'>
+                    <Box mx={5} className='cursor'>
+                        
+                        <Typography variant="h6" color="inherit">
+                            Sobre
+                        </Typography>
+                    </Box>
+                </Link>
+            </Box>
+
+    
+            <Box display='flex' justifyContent='end' width='auto' className='boxToolbar'>
+
+            {menuAdm}
+
+                    <Box className="ponteiro" display='flex' justifySelf='flex-end' alignItems="center" onClick={goLogout}>
+                        <Typography variant="h6" color="inherit">
+                            Logout
+                        </Typography>
+                    </Box>
+            </Box>
+        </Toolbar>
+    </AppBar>
+    }
+
     return (
         <>
-            <Grid container direction="row" justifyContent='center' alignItems="center">
-                <Grid alignItems="center" item xs={12}>
-                    <Box className='logo'>
-                        <Box display='flex' alignItems="center" justifyContent="center">
-                            <Typography variant="h2">Y-Eco</Typography>
-                        </Box>
-                        <Box display='flex' alignItems="center" justifyContent="center">
-                            <Typography variant="h5">Produtos sustentáveis, ecológicos e biodegradáveis</Typography>
-                        </Box>
-                    </Box>
-                </Grid>
-            </Grid>
-
-            <AppBar position="static">
-                <Toolbar className='menu' variant="dense" >
-                    <Box display='flex' justifyContent='center' className='boxToolbar'>
-                        <Box mx={5} className='cursor'>
-                            <HomeRoundedIcon className='icon' />
-                            <Typography variant="h6" color="inherit">
-                                home
-                            </Typography>
-                        </Box>
-
-                        <Box mx={5} className='cursor'>
-                            <ShoppingBagIcon className='icon' />
-                            <Typography variant="h6" color="inherit">
-                                produtos
-                            </Typography>
-                        </Box>
-
-                        <Box mx={5} className='cursor'>
-                            <DashboardIcon className='icon' />
-                            <Typography variant="h6" color="inherit">
-                                categoria
-                            </Typography>
-                        </Box>
-
-                        <Box mx={5} className='cursor'>
-                            <FavoriteIcon className='icon' />
-                            <Typography variant="h6" color="inherit">
-                                doações
-                            </Typography>
-                        </Box>
-                    </Box>
-                    <Box display='flex' justifyContent='end' width='auto' className='boxToolbar'>
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search…"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </Search>
-
-                        <Box display='flex' justifySelf='flex-end' alignItems="center">
-                            <Typography variant="h6" color="inherit">
-                                logout
-                            </Typography>
-                        </Box>
-                    </Box>
-                </Toolbar>
-            </AppBar>
+            {headComponent}
+            {navbarComponent}
         </>
     )
 }

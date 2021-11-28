@@ -1,0 +1,80 @@
+.background{
+    background-color: #006064 !important;
+}
+
+.logo{
+
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.texto{
+    color: white!important;
+    font-weight: bold!important;
+    text-align: center;
+
+}
+
+.botao{
+    border-color: #006064!important;
+    background-color: #3F51B5;
+    color: #006064!important;
+    
+}
+
+.title{
+    background-color: #00363a;
+    width: 60%;
+    border-radius: 50%;
+}
+
+.textosHome {
+    color: white;
+    font-style: italic;
+}
+.textos{
+    color: white;
+    font-style: italic;
+}
+.img{
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10%;
+    border-color: #006064;
+}
+
+.container{
+    display: flex; 
+    flex-flow: row;
+    justify-content: center ;
+    align-items: center;
+}
+
+.backpost{
+    width: 60%;
+    height: 700px;
+    background-color: black;
+}
+.imagemBack{
+    background-color: #eafdfd;
+    background-image: url("https://www.transparenttextures.com/patterns/grid-noise.png");   
+}
+.text-decoration-none{
+    text-decoration: none;
+    color: black;
+}
+.imgH{
+
+    width: 50%;
+    height: 150%;
+}
+.textValor{
+    text-decoration: line-through;
+    color: red !important;
+    ;
+}
+

@@ -1,0 +1,56 @@
+.text-decorator-none{
+    text-decoration: none;
+    color: black !important;
+}
+
+.card {
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.border-image{
+ border-radius: 20px;
+}
+
+.imgProduto {
+    height: 200px;
+    width: 200px;
+}
+
+.cardProduto {
+    width: 250px;
+    height: 540px;
+}
+
+.fontListaProduto{
+    text-align: justify;
+    font-size: 20px !important;
+}
+
+.tamanhoBox{
+    height: 30px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.principalBox{
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:15px;
+    place-items: center;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    margin: 20px 0;
+}
+@media(min-width:1441px){
+    .principalBox{
+        grid-template-columns:repeat(4, 1fr);
+
+    }
+}
+
+
+
+

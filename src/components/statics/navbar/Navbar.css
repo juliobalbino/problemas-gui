@@ -12,21 +12,40 @@
 }
 
 .boxToolbar{
-    background-color: #005B4F;
+    background-color: #00363a;
     width:100%;
 }
 
 .logo{
-    background-color: #00897B;
-    min-height: 113px;
-    color: #FFFFFF;
+    background-color: #006064;
+    display: flex;
+    justify-content: center;
 }
 
 .menu{
-    background-color: #005B4F !important;
+    background-color: #00363a !important;
     justify-content: center;
 }
 
 .icon{
     font-size: 35px !important;
+}
+
+.logout{
+    color: white !important;
+}
+
+.ponteiro{
+    cursor: pointer;
+    color: white;
+}
+
+.imgLogo{
+    height: 200px;
+    
+}
+
+.linkProperties{
+    text-decoration: none;
+    color: white !important;
 }
